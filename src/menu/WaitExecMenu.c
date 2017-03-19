@@ -1,8 +1,8 @@
 
 
+#include <movement/RoboModule.h>
 #include "WaitExecMenu.h"
 #include "MenuTexts.h"
-#include "../robo/RoboModule.h"
 
 USE_MENU_TEXTS;
 Menu _waitExecMenu;
@@ -27,7 +27,7 @@ void WaitExecMenu_Init(Menu* parent)
 	_arrChar = CHAR_ARRRIGHT;
 }
 
-__inline__ Menu* WaitExecMenu_GetMenu()
+ Menu* WaitExecMenu_GetMenu()
 {
 	return &_waitExecMenu;
 }

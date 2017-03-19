@@ -8,10 +8,10 @@
 #ifndef PROGRAMINSTRUCTIONEDITMENU_H_
 #define PROGRAMINSTRUCTIONEDITMENU_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "MenuModule.h"
 
 void ProgramInstructionEditMenu_Init(Menu* parent);
-__inline__ Menu* ProgramInstructionEditMenu_GetMenu();
+ Menu* ProgramInstructionEditMenu_GetMenu();
 
 #endif /* PROGRAMINSTRUCTIONEDITMENU_H_ */

@@ -8,11 +8,11 @@
 #ifndef PROGRAMPRIMEMENU_H_
 #define PROGRAMPRIMEMENU_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "MenuModule.h"
 
 void ProgramPrimeMenu_Init(Menu* parent);
-__inline__ Menu* ProgramPrimeMenu_GetMenu();
+ Menu* ProgramPrimeMenu_GetMenu();
 
 #define PROG_STATUS_OK 0
 #define PROG_STATUS_BWD 1

@@ -8,11 +8,11 @@
 #ifndef MENUEXECPROGRAM_H_
 #define MENUEXECPROGRAM_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "MenuModule.h"
 
 void ProgramExecMenu_Init(Menu* parent);
-__inline__ Menu* ProgramExecMenu_GetMenu();
+ Menu* ProgramExecMenu_GetMenu();
 
 // On first update -> go to choose program menu as child
 // On return if(bwd) -> return to parent (progprime)

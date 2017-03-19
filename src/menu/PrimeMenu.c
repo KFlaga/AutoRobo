@@ -1,8 +1,8 @@
+#include <movement/RoboModule.h>
 #include "PrimeMenu.h"
 #include "MenuTexts.h"
 #include "ButtonModule.h"
 #include "ChooseInstrMenu.h"
-#include "../robo/RoboModule.h"
 #include "WaitExecMenu.h"
 #include "ProgramPrimeMenu.h"
 
@@ -41,7 +41,7 @@ void PrimeMenu_Init()
 	_primeMenu.onReturn = 0;
 }
 
-__inline__ Menu* PrimeMenu_GetMenu()
+ Menu* PrimeMenu_GetMenu()
 {
 	return &_primeMenu;
 }

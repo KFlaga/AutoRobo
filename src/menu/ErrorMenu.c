@@ -28,7 +28,7 @@ void ErrorMenu_Init(Menu* parent, unsigned char* msg, bool is_critical)
 	COPY_MEM(msg, _errorMenu.lineBot, 0, 0, 16);
 }
 
-__inline__ Menu* ErrorMenu_GetMenu()
+ Menu* ErrorMenu_GetMenu()
 {
 	return &_errorMenu;
 }

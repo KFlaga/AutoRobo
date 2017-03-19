@@ -5,11 +5,11 @@
  *      Author: Kamil
  */
 
+#include <movement/RoboVault.h>
 #include "ProgramSetNameMenu.h"
 #include "MenuTexts.h"
 #include "ButtonModule.h"
 #include "ProgramPrimeMenu.h"
-#include "../robo/RoboVault.h"
 
 USE_MENU_TEXTS;
 Menu _programNameMenu;
@@ -47,12 +47,12 @@ void ProgramSetNameMenu_Init(Menu* parent)
 	COPY_MENU_TEXT(TXT_Prog_NewName,_programNameMenu.lineTop);
 }
 
-__inline__ Menu* ProgramSetNameMenu_GetMenu()
+ Menu* ProgramSetNameMenu_GetMenu()
 {
 	return &_programNameMenu;
 }
 
-__inline__ uchar* ProgramSetNameMenu_GetName()
+ uchar* ProgramSetNameMenu_GetName()
 {
 	return _newNameFinal;
 }

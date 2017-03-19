@@ -1,7 +1,7 @@
 #ifndef MODULESCONTROL_H_
 #define MODULESCONTROL_H_
 
-#include "Core.h"
+#include <Utils.h>
 
 #define MODULE_TICK 50 // x 100us
 

@@ -11,7 +11,7 @@ RoboInstruction _instruction;
 void _cim_update(uint16_t buts);
 void _cim_acceptParams(uint16_t paramStatus);
 
-#define _cim_instr_count (ROBOFUN_COUNT - 1)
+#define _cim_instr_count (RoboFunction_FunctionsCount - 1)
 
 static uint8_t _curInstr; // Counted from 1
 
@@ -49,12 +49,12 @@ void ChooseInstrMenu_Init(Menu* parent)
 	ChangeInst();
 }
 
-__inline__ Menu* ChooseInstrMenu_GetMenu()
+ Menu* ChooseInstrMenu_GetMenu()
 {
 	return &_chooseInstrMenu;
 }
 
-__inline__ RoboInstruction* ChooseInstrMenu_GetInstr()
+ RoboInstruction* ChooseInstrMenu_GetInstr()
 {
 	return &_instruction;
 }

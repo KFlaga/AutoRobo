@@ -71,17 +71,17 @@ void MenuModule_Stop()
 	_pendingFlags = 0;
 }
 
-__inline__ void MenuModule_RefreshLcdTop()
+ void MenuModule_RefreshLcdTop()
 {
 	_pendingFlags |= pending_RefreshTop;
 }
 
-__inline__ void MenuModule_RefreshLcdBot()
+ void MenuModule_RefreshLcdBot()
 {
 	_pendingFlags |= pending_RefreshBot;
 }
 
-__inline__ void MenuModule_GoToChild(Menu* child, MenuHandler onReturn)
+ void MenuModule_GoToChild(Menu* child, MenuHandler onReturn)
 {
 	if(child != 0)
 	{
@@ -91,7 +91,7 @@ __inline__ void MenuModule_GoToChild(Menu* child, MenuHandler onReturn)
 	}
 }
 
-__inline__ void MenuModule_BackToParent(uint16_t status)
+ void MenuModule_BackToParent(uint16_t status)
 {
 	if(_currentMenu != 0 && _currentMenu->parent != 0)
 	{

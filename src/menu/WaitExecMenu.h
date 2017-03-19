@@ -8,11 +8,11 @@
 #ifndef WAITEXECMENU_H_
 #define WAITEXECMENU_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "MenuModule.h"
 
 void WaitExecMenu_Init(Menu* parent);
-__inline__ Menu* WaitExecMenu_GetMenu();
+Menu* WaitExecMenu_GetMenu();
 
 
 #endif /* WAITEXECMENU_H_ */

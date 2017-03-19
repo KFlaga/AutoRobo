@@ -6,7 +6,7 @@
 #ifndef MENUBASE_H_
 #define MENUBASE_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "ModulesControl.h"
 
 typedef void(*MenuHandler)(uint16_t);
@@ -29,10 +29,10 @@ void MenuModule_Update(uint16_t interval);
 void MenuModule_Start();
 void MenuModule_Stop();
 
-__inline__ void MenuModule_GoToChild(Menu* child, MenuHandler onReturn);
-__inline__ void MenuModule_BackToParent(uint16_t status);
+ void MenuModule_GoToChild(Menu* child, MenuHandler onReturn);
+ void MenuModule_BackToParent(uint16_t status);
 
-__inline__ void MenuModule_RefreshLcdTop();
-__inline__ void MenuModule_RefreshLcdBot();
+ void MenuModule_RefreshLcdTop();
+ void MenuModule_RefreshLcdBot();
 
 #endif /* MENUBASE_H_ */

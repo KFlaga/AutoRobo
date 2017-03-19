@@ -5,6 +5,6 @@
 #include "MenuModule.h"
 
 void PrimeMenu_Init();
-__inline__ Menu* PrimeMenu_GetMenu();
+ Menu* PrimeMenu_GetMenu();
 
 #endif /* PRIMEMENU_H_ */

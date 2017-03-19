@@ -24,10 +24,7 @@ typedef void(*SysTickCallback)();
  void RegisterTickCounter_NOASSERT(volatile  uint32_t* counter, uint8_t slot);
 
 
-#define SLOT_MotoPWM_FL 0
-#define SLOT_MotoPWM_FR 1
-#define SLOT_MotoPWM_BL 2
-#define SLOT_MotoPWM_BR 3
+#define SLOT_MotoPWM 0
 
 #define SLOT_RoboWait 4
 

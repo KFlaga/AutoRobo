@@ -1,8 +1,8 @@
+#include <movement/RoboVault.h>
 #include "ProgramChooseMenu.h"
 #include "ProgramPrimeMenu.h"
 #include "ButtonModule.h"
 #include "MenuTexts.h"
-#include "../robo/RoboVault.h"
 
 
 USE_MENU_TEXTS;
@@ -25,12 +25,12 @@ void ProgramChooseMenu_Init(Menu* parent)
 		COPY_MEM(RoboVault_GetProgramById(_curProg)->name,_progChooseMenu.lineBot,0,0,12);
 }
 
-__inline__ Menu* ProgramChooseMenu_GetMenu()
+ Menu* ProgramChooseMenu_GetMenu()
 {
 	return &_progChooseMenu;
 }
 
-__inline__ RoboProgram* ProgramChooseMenu_GetProgram()
+ RoboProgram* ProgramChooseMenu_GetProgram()
 {
 	return RoboVault_GetProgramById(_curProg);
 }

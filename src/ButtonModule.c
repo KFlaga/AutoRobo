@@ -128,17 +128,17 @@ void _setMuxPins(uint8_t code)
 		asm("nop");
 }
 
-__inline__ uint16_t GetButtonStates()
+ uint16_t GetButtonStates()
 {
 	return _butStates[0];
 }
 
-__inline__ uint16_t GetPressedButtons()
+ uint16_t GetPressedButtons()
 {
 	return _pressed;
 }
 
-__inline__ uint16_t GetReleasedButtons()
+ uint16_t GetReleasedButtons()
 {
 	return _released;
 }

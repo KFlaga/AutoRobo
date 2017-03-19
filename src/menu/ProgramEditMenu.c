@@ -1,10 +1,10 @@
+#include <movement/RoboProgram.h>
+#include <movement/RoboVault.h>
 #include "ProgramEditMenu.h"
 #include "ProgramSetNameMenu.h"
 #include "ProgramPrimeMenu.h"
 #include "Memory.h"
 #include "MenuTexts.h"
-#include "../robo/RoboProgram.h"
-#include "../robo/RoboVault.h"
 #include "ChooseInstrMenu.h"
 #include "ButtonModule.h"
 
@@ -12,7 +12,7 @@ USE_MENU_TEXTS;
 Menu _programChangeMenu;
 RoboProgram _program;
 
-extern const RoboFunDef _roboFuns[ROBOFUN_COUNT];
+extern const RoboFunDef _roboFuns[RoboFunction_FunctionsCount];
 
 static int8_t _curParam;
 static int8_t _curInstr;
@@ -27,6 +27,8 @@ static const uchar _returnChars[] = {
 		' ',' ',' ','R','e','t','u','r',
 		'n',' ',' ',' ',' ',' ',' ',' '
 };
+
+static RoboInstruction* _currentInstruction;
 
 void _pnm_chooseName(uint16_t);
 void _penm_update(uint16_t pressed);
@@ -64,12 +66,12 @@ void ProgramEditMenu_Init(Menu* parent)
 	_isEditMenu = true;
 }
 
-__inline__ Menu* ProgramNewMenu_GetMenu()
+ Menu* ProgramNewMenu_GetMenu()
 {
 	return &_programChangeMenu;
 }
 
-__inline__ Menu* ProgramEditMenu_GetMenu()
+ Menu* ProgramEditMenu_GetMenu()
 {
 	return &_programChangeMenu;
 }
@@ -151,7 +153,7 @@ void _penm_update(uint16_t pressed)
 			COPY_MEM(_emptyInst.functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
 			_penm_updateInstrNum();
-			_program.currentInstruction = 0;
+			_currentInstruction = 0;
 			_curParam = 0;
 
 			MenuModule_RefreshLcdBot();
@@ -159,8 +161,8 @@ void _penm_update(uint16_t pressed)
 		else if(_curInstr < _program.instCount - 1) // go to next instr
 		{
 			_curInstr++;
-			_program.currentInstruction = _program.currentInstruction->next;
-			COPY_MEM(_program.currentInstruction->functionDef->name,
+			_currentInstruction = _currentInstruction->next;
+			COPY_MEM(_currentInstruction->functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
 			_penm_updateInstrNum();
 			_curParam = 0;
@@ -186,7 +188,7 @@ void _penm_update(uint16_t pressed)
 		else if(_curInstr == _program.instCount && _curInstr > 0) // go from empty to last
 		{
 			_curInstr--;
-			_program.currentInstruction = _program.lastInstruction;
+			_currentInstruction = _program.lastInstruction;
 			COPY_MEM(_program.lastInstruction->functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
 			_penm_updateInstrNum();
@@ -197,8 +199,8 @@ void _penm_update(uint16_t pressed)
 		else if(_curInstr > 0) // go to prev instr
 		{
 			_curInstr--;
-			_program.currentInstruction = _program.currentInstruction->next;
-			COPY_MEM(_program.currentInstruction->functionDef->name,
+			_currentInstruction = _currentInstruction->next;
+			COPY_MEM(_currentInstruction->functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
 			_penm_updateInstrNum();
 			_curParam = 0;
@@ -212,7 +214,7 @@ void _penm_update(uint16_t pressed)
 		// last param is visible, do nothing
 		// else move to next param
 		if(_curInstr < _program.instCount)
-			if(_curParam < _program.currentInstruction->functionDef->paramCount )
+			if(_curParam < _currentInstruction->functionDef->paramCount )
 			{
 				// move to next param
 				_curParam++;
@@ -283,10 +285,10 @@ void _penm_newInstrReturn(uint16_t status)
 		else
 			_program.firstInstruction = newInstr;
 		_program.lastInstruction = newInstr;
-		_program.currentInstruction = newInstr;
+		_currentInstruction = newInstr;
 
 		// Update lcd
-		COPY_MEM(_program.currentInstruction->functionDef->name,
+		COPY_MEM(_currentInstruction->functionDef->name,
 				_programChangeMenu.lineBot, 0, 3, 8);
 		_penm_updateInstrNum();
 
@@ -303,7 +305,7 @@ void _penm_editInstReturn(uint16_t status)
 	}
 	else if(status == PROG_STATUS_INST_REMOVED)
 	{
-		RoboInstruction* toRemove = _program.currentInstruction;
+		RoboInstruction* toRemove = _currentInstruction;
 
 		if(_curInstr == _program.instCount - 1) // last
 		{
@@ -313,7 +315,7 @@ void _penm_editInstReturn(uint16_t status)
 				_program.lastInstruction->next = 0;
 		}
 		else if(_program.instCount > 1)
-			_program.currentInstruction->next->prev = _program.currentInstruction->prev;
+			_currentInstruction->next->prev = _currentInstruction->prev;
 		if(_curInstr == 0) // first
 		{
 			_program.firstInstruction = _program.firstInstruction->next;
@@ -321,21 +323,21 @@ void _penm_editInstReturn(uint16_t status)
 				_program.firstInstruction->prev = 0;
 		}
 		else if(_program.instCount > 1)
-			_program.currentInstruction->prev->next = _program.currentInstruction->next;
+			_currentInstruction->prev->next = _currentInstruction->next;
 		if(_program.instCount == 1) // no more instructions
 		{
 			COPY_MEM(_emptyInst.functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
-			_program.currentInstruction = 0;
+			_currentInstruction = 0;
 		}
 		else
 		{
 			if(_curInstr == 0)
-				_program.currentInstruction = _program.currentInstruction->next;
+				_currentInstruction = _currentInstruction->next;
 			else
-				_program.currentInstruction = _program.currentInstruction->prev;
+				_currentInstruction = _currentInstruction->prev;
 
-			COPY_MEM(_program.currentInstruction->functionDef->name,
+			COPY_MEM(_currentInstruction->functionDef->name,
 					_programChangeMenu.lineBot, 0, 3, 8);
 		}
 
@@ -352,13 +354,13 @@ void _penm_changeInstructionReturn(uint16_t status)
 	if(status == PROG_STATUS_CHOOSEN)
 	{
 		RoboInstruction* newcpy = ChooseInstrMenu_GetInstr();
-		_program.currentInstruction->functionDef = newcpy->functionDef;
-		_program.currentInstruction->params[0] = newcpy->params[0];
-		_program.currentInstruction->params[2] = newcpy->params[1];
-		_program.currentInstruction->params[1] = newcpy->params[2];
+		_currentInstruction->functionDef = newcpy->functionDef;
+		_currentInstruction->params[0] = newcpy->params[0];
+		_currentInstruction->params[2] = newcpy->params[1];
+		_currentInstruction->params[1] = newcpy->params[2];
 
 		// Update lcd
-		COPY_MEM(_program.currentInstruction->functionDef->name,
+		COPY_MEM(_currentInstruction->functionDef->name,
 				_programChangeMenu.lineBot, 0, 3, 8);\
 		MenuModule_RefreshLcdBot();
 	}

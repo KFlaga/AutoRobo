@@ -29,7 +29,7 @@ void SysTick_Handler()
 	}
 }
 
-__inline__ int8_t RegisterTickFunction(SysTickCallback callback, uint8_t slot)
+int8_t RegisterTickFunction(SysTickCallback callback, uint8_t slot)
 {
 	if(slot > 31)
 		return ERROR_SLOTHIGH;
@@ -40,7 +40,7 @@ __inline__ int8_t RegisterTickFunction(SysTickCallback callback, uint8_t slot)
 	return 0;
 }
 
-__inline__ int8_t RegisterTickCounter(volatile uint32_t* counter, uint8_t slot)
+int8_t RegisterTickCounter(volatile uint32_t* counter, uint8_t slot)
 {
 	if(slot > 31)
 		return ERROR_SLOTHIGH;
@@ -51,37 +51,37 @@ __inline__ int8_t RegisterTickCounter(volatile uint32_t* counter, uint8_t slot)
 	return 0;
 }
 
-__inline__ void UnregisterTickFunction(uint8_t slot)
+void UnregisterTickFunction(uint8_t slot)
 {
 	RF_Flags &= ~((uint32_t)(1 << slot));
 }
 
-__inline__ void UnregisterTickCounter(uint8_t slot)
+void UnregisterTickCounter(uint8_t slot)
 {
 	RC_Flags &= ~((uint32_t)(1 << slot));
 }
 
-__inline__ int8_t RegisterTickFunction_NOVWRT(SysTickCallback callback, uint8_t slot)
+int8_t RegisterTickFunction_NOVWRT(SysTickCallback callback, uint8_t slot)
 {
 	if(RF_Flags & 1 << slot)
 		return ERROR_SLOTUSED;
 	return RegisterTickFunction(callback, slot);
 }
 
-__inline__ int8_t RegisterTickCounter_NOVWRT(volatile uint32_t* counter, uint8_t slot)
+int8_t RegisterTickCounter_NOVWRT(volatile uint32_t* counter, uint8_t slot)
 {
 	if(RC_Flags & 1 << slot)
 		return ERROR_SLOTUSED;
 	return RegisterTickCounter(counter, slot);
 }
 
-__inline__ void RegisterTickFunction_NOASSERT(SysTickCallback callback, uint8_t slot)
+void RegisterTickFunction_NOASSERT(SysTickCallback callback, uint8_t slot)
 {
 	RegisteredFunctions[slot] = callback;
 	RF_Flags |= 1 << slot;
 }
 
-__inline__ void RegisterTickCounter_NOASSERT(volatile uint32_t* counter, uint8_t slot)
+void RegisterTickCounter_NOASSERT(volatile uint32_t* counter, uint8_t slot)
 {
 	RegisteredCounters[slot] = counter;
 	RC_Flags |= 1 << slot;

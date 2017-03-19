@@ -1,7 +1,7 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "Pins.h"
 
 #define LcdSetRSWriteCommand() ResetPin(LCD_RS_Port,LCD_RS_Pin)
@@ -19,7 +19,7 @@ void LcdWrite4(uint8_t data);
 void LcdWrite8(uint8_t data);
 
 // Writes 8 bits
-__inline__ void LcdWrite_NoDelay(uint8_t data);
+ void LcdWrite_NoDelay(uint8_t data);
 // Writes line ( if linenum == 2 - line 2, else line 1 )
 void LcdWriteLine_NoDelay(uint8_t linenum, uint8_t* data, uint8_t size);
 

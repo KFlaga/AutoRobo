@@ -30,7 +30,7 @@ void ProgramInstructionEditMenu_Init(Menu* parent)
 	_curOpt = 0;
 }
 
-__inline__ Menu* ProgramInstructionEditMenu_GetMenu()
+ Menu* ProgramInstructionEditMenu_GetMenu()
 {
 	return &_progInstrEditMenu;
 }

@@ -5,13 +5,13 @@
  *      Author: Kamil
  */
 
+#include <movement/RoboModule.h>
 #include "ProgramPrimeMenu.h"
 #include "ProgramEditMenu.h"
 #include "ProgramExecMenu.h"
 #include "ProgramChooseMenu.h"
 #include "ButtonModule.h"
 #include "MenuTexts.h"
-#include "../robo/RoboModule.h"
 #include "WaitExecMenu.h"
 #include "ErrorMenu.h"
 
@@ -51,7 +51,7 @@ void ProgramPrimeMenu_Init(Menu* parent)
 	_curOpt = 0;
 }
 
-__inline__ Menu* ProgramPrimeMenu_GetMenu()
+ Menu* ProgramPrimeMenu_GetMenu()
 {
 	return &_progPrimeMenu;
 }

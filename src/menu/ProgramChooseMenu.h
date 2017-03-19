@@ -8,13 +8,13 @@
 #ifndef PROGRAMCHOOSEMENU_H_
 #define PROGRAMCHOOSEMENU_H_
 
-#include "Core.h"
+#include <movement/RoboProgram.h>
+#include <Utils.h>
 #include "MenuModule.h"
-#include "../robo/RoboProgram.h"
 
 void ProgramChooseMenu_Init(Menu* parent);
-__inline__ Menu* ProgramChooseMenu_GetMenu();
+ Menu* ProgramChooseMenu_GetMenu();
 
-__inline__ RoboProgram* ProgramChooseMenu_GetProgram();
+ RoboProgram* ProgramChooseMenu_GetProgram();
 
 #endif /* PROGRAMPRIMEMENU_H_ */

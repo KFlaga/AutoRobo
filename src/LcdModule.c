@@ -1,12 +1,12 @@
 #include "LcdModule.h"
 #include "Lcd.h"
 
- bool _lcdTurnedOn = FALSE;
- bool volatile _lcdBusy = FALSE;
+ static bool _lcdTurnedOn = FALSE;
+ static bool volatile _lcdBusy = FALSE;
 
- bool volatile _isWaiting = FALSE;
- uint16_t volatile _waitx100us = 0;
- LCDFunction volatile _onWaitEnd = 0;
+ static bool volatile _isWaiting = FALSE;
+ static uint16_t volatile _waitx100us = 0;
+ static LCDFunction volatile _onWaitEnd = 0;
 
 void LcdModule_Init(Module* module)
 {
@@ -42,7 +42,7 @@ void LCDWait(uint16_t ms, LCDFunction onContinue)
 	_isWaiting = true;
 }
 
-__inline__ void LcdModule_WriteEnd()
+ void LcdModule_WriteEnd()
 {
 	_lcdBusy = false;
 }
@@ -64,13 +64,13 @@ void LcdModule_Update(uint16_t interval)
 	}
 }
 
-__inline__ void LcdTurnedOn()
+ void LcdTurnedOn()
 {
 	LcdInit4Byte(TRUE);
 	_lcdTurnedOn = TRUE;
 }
 
-__inline__ void LcdTurnedOff()
+ void LcdTurnedOff()
 {
 	_lcdTurnedOn = FALSE;
 	_isWaiting = FALSE;
@@ -78,17 +78,17 @@ __inline__ void LcdTurnedOff()
 	_waitx100us = 0;
 }
 
-__inline__ bool LcdIsOn()
+ bool LcdIsOn()
 {
 	return _lcdTurnedOn;
 }
 
-__inline__ bool LcdIsBusy()
+ bool LcdIsBusy()
 {
 	return _lcdBusy;
 }
 
-__inline__ bool LcdModule_WriteLine(uint8_t line, uint8_t* data, uint8_t size)
+ bool LcdModule_WriteLine(uint8_t line, uint8_t* data, uint8_t size)
 {
 	if(!_isWaiting)
 	{

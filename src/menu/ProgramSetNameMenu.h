@@ -8,12 +8,12 @@
 #ifndef PROGRAMSETNAMEMENU_H_
 #define PROGRAMSETNAMEMENU_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "MenuModule.h"
 
 void ProgramSetNameMenu_Init(Menu* parent);
-__inline__ Menu* ProgramSetNameMenu_GetMenu();
+ Menu* ProgramSetNameMenu_GetMenu();
 
-__inline__ uchar* ProgramSetNameMenu_GetName();
+ uchar* ProgramSetNameMenu_GetName();
 
 #endif /* PROGRAMSETNAMEMENU_H_ */

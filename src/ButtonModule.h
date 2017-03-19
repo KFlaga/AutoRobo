@@ -1,7 +1,7 @@
 #ifndef BUTTINS_H_
 #define BUTTINS_H_
 
-#include "Core.h"
+#include <Utils.h>
 #include "Pins.h"
 #include "ModulesControl.h"
 
@@ -58,8 +58,8 @@ void ButtonModule_Test1();
 // - buttons pressed
 // - buttons released
 
-__inline__ uint16_t GetButtonStates();
-__inline__ uint16_t GetPressedButtons();
-__inline__ uint16_t GetReleasedButtons();
+ uint16_t GetButtonStates();
+ uint16_t GetPressedButtons();
+ uint16_t GetReleasedButtons();
 
 #endif

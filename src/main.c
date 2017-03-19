@@ -1,15 +1,15 @@
-#include "Core.h"
+#include <movement/LowLevelMotorControl.h>
+#include <movement/RoboModule.h>
+#include <movement/RoboProgram.h>
+#include <movement/RoboVault.h>
+#include <Utils.h>
 #include "Initialization.h"
 #include "ModulesControl.h"
 #include "LcdModule.h"
 #include "Lcd.h"
 #include "Pins.h"
-#include "robo/RoboModule.h"
 #include "menu/MenuModule.h"
 #include "ButtonModule.h"
-#include "robo/RoboProgram.h"
-#include "robo/MotorControl.h"
-#include "robo/RoboVault.h"
 #include "Encoders.h"
 
 int main(void)

@@ -56,27 +56,28 @@ void Encoders_Stop()
 	Encoders_StartRead();
 }
 
-__inline__ uint16_t Encoders_GetReadings(uint8_t enc_num)
+ uint16_t Encoders_GetReadings(uint8_t enc_num)
 {
 	return _readings[enc_num];
 }
 
-__inline__ float Encoders_GetDistance(uint8_t enc_num)
+ float Encoders_GetDistance(uint8_t enc_num)
 {
-	return ((float)_readings[enc_num]) * (float)ROBO_WHEELDIAMETER * PI / (float)ENC_PUL_PER_TURN;
+//	return ((float)_readings[enc_num]) * (float)ROBO_WHEELDIAMETER * PI / (float)ENC_PUL_PER_TURN;
+	 return 0.f;
 }
 
-__inline__ float Encoders_GetAngle(uint8_t enc_num)
+ float Encoders_GetAngle(uint8_t enc_num)
 {
 	return ((float)_readings[enc_num]) * ENC_ANG_PER_PULSE;
 }
 
-__inline__ void Encoders_Reset(uint8_t enc_num)
+ void Encoders_Reset(uint8_t enc_num)
 {
 	_readings[enc_num] = 0;
 }
 
-__inline__ void Encoders_ResetAll()
+ void Encoders_ResetAll()
 {
 	_readings[0] = 0;
 	_readings[1] = 0;
@@ -85,7 +86,7 @@ __inline__ void Encoders_ResetAll()
 }
 
 static bool _encLastStates[4]; // true on high
-__inline__ void Encoders_StartRead()
+ void Encoders_StartRead()
 {
 	EnableEncoders();
 	// Check initial pin states on encoders
@@ -97,13 +98,13 @@ __inline__ void Encoders_StartRead()
 	_isEncReading = true;
 }
 
-__inline__ void Encoders_StopRead()
+ void Encoders_StopRead()
 {
 	_isEncReading = false;
 	DisableEncoders();
 }
 
-__inline__ bool Encoders_IsReading()
+ bool Encoders_IsReading()
 {
 	return _isEncReading;
 }

@@ -145,7 +145,7 @@ void LcdInitNoDelay()
 	_lcdCallTree->curFun = 0;
 }
 
-__inline__ void LcdWrite_NoDelay(uint8_t data)
+ void LcdWrite_NoDelay(uint8_t data)
 {
 	LcdSetRSWriteData();
 	_lcdWrite8Begin(data);
